@@ -16,6 +16,7 @@ public class QuizActivity extends AppCompatActivity {
 
     public static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
+    private static final int REQUEST_CODE_CHEAT=0;
     private Button mTrueButton;
     private Button mFalseButton;
     private ImageButton mNextButton;
@@ -125,9 +126,11 @@ public class QuizActivity extends AppCompatActivity {
         mCheatButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                //ponemos en una constante si la pregunta seleccionada es falso o verdadero
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                //utilizamos el intent ya creado en cheatactivity para enviar la informacion
                 Intent i = CheatActivity.newIntent(QuizActivity.this,answerIsTrue);
-                startActivity(i);
+                startActivityForResult(i,REQUEST_CODE_CHEAT);
 
             }
 
